@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AJMATH TRADERS — VAT TEA COMPANY (Premium)</title>
+  <meta name="description" content="VAT TEA COMPANY by AJMATH TRADERS — premium Assam blends, wholesale & retail." />
+  <style>
+    /* ========================
+       AJMATH TRADERS - Single-file Premium UI
+       - Dark premium theme inspired by Nescafé Sunrise layout
+       - All CSS + animations in this file
+       ======================== */
+    :root{
+      --bg:#0b0b0b;
+      --panel:#121212;
+      --muted:#9aa1a6;
+      --gold:#d4af37;
+      --accent:#7b3f1b; /* rich tea-brown */
+      --accent-2:#2e7d32; /* green accent */
+      --glass: rgba(255,255,255,0.03);
+      --card:#151515;
+      --radius:14px;
+      --maxw:1200px;
+      --transition:all .36s cubic-bezier(.2,.9,.3,1);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#070707 0%, #0f0f10 60%);
+      color:#eee;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      overflow-y:scroll;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+
+    /* Header */
+    header.site-header{
+      position:sticky;top:0;z-index:40;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(6,6,6,0.55), rgba(6,6,6,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+    }
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 20px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand .logo{
+      width:56px;height:56px;border-radius:10px;overflow:hidden;border:2px solid rgba(255,255,255,0.04);
+      background:linear-gradient(135deg,#2e7d32,#7b3f1b);display:flex;align-items:center;justify-content:center;font-weight:700;
+    }
+    .brand h1{font-size:18px;margin:0;letter-spacing:0.6px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+    .nav-actions{display:flex;align-items:center;gap:12px}
+    .search{
+      display:flex;align-items:center;background:var(--glass);padding:8px;border-radius:999px;gap:8px;border:1px solid rgba(255,255,255,0.03);
+      width:420px;max-width:48vw;
+    }
+    .search input{background:transparent;border:0;outline:0;color:inherit;width:100%}
+    .btn{cursor:pointer;border:0;padding:10px 14px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#fff;font-weight:600}
+    .icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;display:flex;align-items:center;gap:8px;color:var(--muted)}
+
+    /* Hero (parallax feel) */
+    .hero{
+      min-height:70vh;display:flex;align-items:center;position:relative;overflow:hidden;
+      margin-bottom:18px;
+    }
+    .hero .hero-bg{
+      position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1543332164-7bbc5f3b3e90?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=8c5e5d9f8e7acb1f2aa3ef5f6de7b0e4');
+      background-size:cover;background-position:center;filter:contrast(.86) saturate(.9) blur(0.6px);
+      transform: translateZ(0);
+    }
+    .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg, rgba(6,6,6,0.25) 0%, rgba(6,6,6,0.6) 100%);}
+    .hero .container{position:relative;z-index:3;display:grid;grid-template-columns:1fr 460px;gap:28px;align-items:center}
+    .hero-left{padding:28px 18px}
+    .kicker{display:inline-block;padding:6px 12px;background:rgba(255,255,255,0.04);border-radius:999px;color:var(--muted);font-size:13px;margin-bottom:10px}
+    .hero h2{font-size:44px;line-height:1.02;margin:8px 0 12px;color:#fff;letter-spacing:0.2px}
+    .hero p{color:var(--muted);font-size:16px;margin-bottom:18px}
+    .hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+    .hero .product-card-hero{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center;box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+    }
+    .hero .product-card-hero img{width:120px;height:120px;object-fit:cover;border-radius:10px}
+    .hero .price{font-size:20px;font-weight:700;color:var(--gold)}
+
+    /* Product grid */
+    .section{padding:36px 0 64px}
+    .section .header-row{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:18px}
+    .section h3{margin:0;color:var(--gold);font-size:20px}
+    .filters{display:flex;gap:10px;align-items:center}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+    .prod-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.03);
+      transition:var(--transition);position:relative;
+    }
+    .prod-card:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(0,0,0,0.6)}
+    .prod-media{height:180px;border-radius:10px;overflow:hidden;background:#111;display:flex;align-items:center;justify-content:center}
+    .prod-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+    .prod-card:hover .prod-media img{transform:scale(1.06)}
+    .prod-title{font-weight:700;margin:10px 0 6px}
+    .prod-desc{color:var(--muted);font-size:13px;margin-bottom:6px}
+    .prod-price-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .price{font-weight:800;color:var(--gold)}
+    .mrp{font-size:13px;text-decoration:line-through;color:rgba(255,255,255,0.35)}
+    .add-btn{padding:8px 12px;border-radius:10px;border:0;background:linear-gradient(90deg,var(--accent),#b66a3b);color:#fff;cursor:pointer}
+
+    /* Product modal / detail */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
+    .overlay.open{display:flex}
+    .modal{width:100%;max-width:980px;background:linear-gradient(180deg,#0f0f0f,#111);border-radius:14px;padding:20px;display:grid;grid-template-columns:420px 1fr;gap:18px;box-shadow:0 30px 80px rgba(0,0,0,0.7)}
+    .modal .gallery{border-radius:10px;overflow:hidden}
+    .thumb-row{display:flex;gap:8px;margin-top:8px}
+    .thumb-row img{width:64px;height:64px;object-fit:cover;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
+    .modal .details h2{margin:0}
+    .qty{display:flex;align-items:center;gap:8px;margin-top:12px}
+    .qty input{width:80px;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:inherit}
+
+    /* Cart Drawer */
+    .cart-drawer{position:fixed;right:0;top:0;height:100vh;width:380px;background:linear-gradient(180deg,#0e0e0e,#121212);box-shadow:-20px 0 60px rgba(0,0,0,0.7);transform:translateX(110%);transition:transform .36s cubic-bezier(.2,.9,.3,1);z-index:70;padding:20px;display:flex;flex-direction:column;gap:12px}
+    .cart-drawer.open{transform:translateX(0)}
+    .cart-header{display:flex;align-items:center;justify-content:space-between}
+    .cart-items{flex:1;overflow:auto;display:flex;flex-direction:column;gap:12px;padding-top:6px}
+    .cart-item{display:flex;gap:12px;align-items:center;border-radius:10px;padding:10px;background:rgba(255,255,255,0.02)}
+    .cart-item img{width:72px;height:72px;object-fit:cover;border-radius:8px}
+    .cart-footer{border-top:1px solid rgba(255,255,255,0.03);padding-top:12px;display:flex;flex-direction:column;gap:8px}
+
+    /* Checkout success */
+    .success-panel{background:linear-gradient(180deg,#0b0b0b,#141414);border-radius:12px;padding:20px;text-align:center}
+
+    /* Admin small */
+    .admin-bar{position:fixed;left:20px;bottom:20px;background:rgba(255,255,255,0.03);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);z-index:80}
+    .admin-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:8px;color:var(--muted)}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero .container{grid-template-columns:1fr}
+      .modal{grid-template-columns:1fr}
+      .cart-drawer{width:100%;left:0;right:0}
+      .search{display:none}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden>VAT</div>
+        <div>
+          <h1>AJMATH TRADERS</h1>
+          <small>VAT TEA COMPANY</small>
+        </div>
+      </div>
+
+      <div class="nav-actions">
+        <div class="search" role="search" aria-label="Search products">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M21 21l-4.35-4.35" stroke="rgba(255,255,255,0.7)" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <input id="searchInput" placeholder="Search tea, blends, packs..." />
+        </div>
+
+        <button class="icon-btn" id="btnViewProducts" title="Products">Products</button>
+        <button id="btnCart" class="icon-btn" aria-label="Cart">🛒 <span id="cartCount" style="margin-left:8px">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" role="region" aria-label="Featured">
+    <div class="hero-bg" id="heroBg" aria-hidden></div>
+    <div class="container">
+      <div class="hero-left">
+        <div class="kicker">Premium Blend</div>
+        <h2>VAT Premium Assam Tea — bold taste, pure aroma</h2>
+        <p>Handpicked Assam leaves, crafted for a rich cup every time. Wholesale packs and retail sizes — sourced responsibly.</p>
+        <div class="hero-ctas" style="margin-top:10px">
+          <button id="shopNow" class="btn">Shop products</button>
+          <button id="learnMore" class="icon-btn">Learn about VAT</button>
+        </div>
+
+        <div style="margin-top:20px">
+          <!-- hero mini product -->
+          <div class="product-card-hero" role="group" aria-label="Featured product">
+            <img src="https://images.unsplash.com/photo-1582719478250-4bd01f3f9b85?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=51bb74a2a2c3b8b6b6fa2ceb02d2a5b6" alt="VAT Premium Assam Tea">
+            <div>
+              <div style="font-weight:700">VAT Premium Assam Tea - 1 kg</div>
+              <div style="color:var(--muted);font-size:13px;margin-top:6px">Fresh CTC Assam — rich & strong.</div>
+              <div style="margin-top:8px" class="price">₹420 <span class="mrp" style="color:rgba(255,255,255,0.4);font-weight:600;margin-left:8px">₹500</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right" style="display:flex;align-items:center;justify-content:center">
+        <!-- big hero image -->
+        <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&s=4b8a3f4d050c3a0ee0f9672d6a6f2f4a" alt="Tea hero" style="width:420px;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.6);transform:translateY(0)">
+      </div>
+    </div>
+  </section>
+
+  <!-- Products section -->
+  <main class="container section" id="productsSection">
+    <div class="header-row">
+      <div>
+        <h3>Our Products</h3>
+        <div style="color:var(--muted);font-size:13px;margin-top:6px">Explore wholesale and retail packs — filter by category or price.</div>
+      </div>
+      <div class="filters">
+        <select id="filterCategory" style="background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px;border-radius:8px;color:var(--muted)">
+          <option value="">All categories</option>
+          <option>Tea</option>
+          <option>Spices</option>
+          <option>Gifts</option>
+        </select>
+        <select id="sortSel" style="background:transparent;border:1px solid rgba(255,255,255,0.03);padding:8px;border-radius:8px;color:var(--muted)">
+          <option value="popular">Most popular</option>
+          <option value="price_asc">Price: Low → High</option>
+          <option value="price_desc">Price: High → Low</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="grid" class="grid" aria-live="polite">
+      <!-- product cards injected by JS -->
+    </div>
+
+    <div style="margin-top:28px;display:flex;justify-content:center">
+      <button id="loadMore" class="icon-btn">Load more</button>
+    </div>
+  </main>
+
+  <!-- Overlay product detail modal -->
+  <div id="prodOverlay" class="overlay" role="dialog" aria-hidden="true" aria-labelledby="prodTitle">
+    <div class="modal" role="document">
+      <div>
+        <div class="gallery">
+          <img id="modalMainImg" src="" alt="" style="width:100%;height:360px;object-fit:cover;border-radius:10px" />
+          <div class="thumb-row" id="modalThumbs"></div>
+        </div>
+      </div>
+      <div class="details">
+        <button id="closeModal" class="icon-btn" style="float:right">Close ✕</button>
+        <h2 id="prodTitle">Product name</h2>
+        <div style="color:var(--muted);margin-top:6px" id="prodSku">SKU • Weight</div>
+        <p style="margin-top:12px;color:var(--muted)" id="prodDesc">Product description</p>
+        <div style="margin-top:10px" class="prod-price-row">
+          <div>
+            <div class="price" id="prodPrice">₹0</div>
+            <div class="mrp" id="prodMrp">₹0</div>
+          </div>
+          <div style="text-align:right">
+            <div class="qty"><label style="font-size:13px;color:var(--muted)">Qty</label>
+              <input id="qtyInput" type="number" min="1" value="1" />
+            </div>
+            <div style="margin-top:12px"><button id="addToCartModal" class="add-btn">Add to cart</button></div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px;color:var(--muted)"><strong>Highlights:</strong>
+          <ul id="prodHighlights" style="margin-top:8px;color:var(--muted)"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart drawer -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-header">
+      <div style="font-weight:700">Your cart</div>
+      <div><button id="closeCart" class="icon-btn">Close</button></div>
+    </div>
+
+    <div class="cart-items" id="cartItemsList" role="region" aria-live="polite">
+      <!-- items -->
+    </div>
+
+    <div class="cart-footer">
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <div style="color:var(--muted);font-size:14px">Subtotal</div>
+        <div id="cartSubtotal" style="font-weight:800;color:var(--gold)">₹0</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button id="btnCheckout" class="btn" style="flex:1">Checkout</button>
+        <button id="btnClearCart" class="icon-btn" style="flex:0">Clear</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Checkout / success area (inline panel) -->
+  <main class="container section" id="checkoutSection" style="display:none">
+    <div style="max-width:820px;margin:0 auto">
+      <h3>Checkout</h3>
+      <form id="checkoutForm" style="display:grid;gap:12px;margin-top:12px">
+        <input name="name" placeholder="Full name" required style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+        <input name="phone" placeholder="Phone number" required style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+        <textarea name="address" placeholder="Shipping address" rows="4" required style="padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit"></textarea>
+        <div style="display:flex;gap:10px">
+          <input name="city" placeholder="City" required style="flex:1;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+          <input name="pincode" placeholder="Pincode" required style="width:160px;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit" />
+        </div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button type="submit" class="btn">Place order (Mock)</button>
+          <button type="button" id="cancelCheckout" class="icon-btn">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <main class="container section" id="orderSuccessSection" style="display:none">
+    <div class="success-panel">
+      <h3>Order confirmed — thank you!</h3>
+      <p id="orderRef" style="color:var(--muted)"></p>
+      <div style="margin-top:12px">
+        <button id="backToShop" class="btn">Back to shop</button>
+      </div>
+    </div>
+  </main>
+
+  <!-- small admin quick access -->
+  <div class="admin-bar" title="Admin (manage products)">
+    <button id="adminOpen" class="admin-btn">Admin</button>
+  </div>
+
+  <script>
+    /**************************************************************************
+     * Single-file front + simulated backend for AJMATH TRADERS - VAT TEA COMPANY
+     * - All data stored in localStorage for demo
+     * - Replace persistence/API calls to adapt to real backend easily
+     **************************************************************************/
+
+    /* ========== Seed data (includes VAT Premium Assam Tea) ========== */
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 1,
+        title: "VAT Premium Assam Tea - 1 kg",
+        slug: "vat-premium-assam-tea-1kg",
+        description: "AJMATH TRADERS - VAT TEA COMPANY: Premium CTC Assam tea, bold flavor, rich aroma. Ideal for retailers and households. Freshly packed, hygienic packing.",
+        price: 420.00,
+        mrp: 500.00,
+        category: "Tea",
+        images: [
+          "https://images.unsplash.com/photo-1582719478250-4bd01f3f9b85?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=51bb74a2a2c3b8b6b6fa2ceb02d2a5b6",
+          "https://images.unsplash.com/photo-1506806732259-39c2d0268443?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=78ba2cb3c1c8f8b6c8f408f8b2c1d2d7",
+          "https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4b8a3f4d050c3a0ee0f9672d6a6f2f4a"
+        ],
+        stock: 250,
+        sku: "VAT-TEA-1KG-ASSAM",
+        weight: "1kg",
+        highlights: ["Bold CTC Assam", "Freshly packed", "Ideal for chai & retail"]
+      },
+      { id: 2, title: "VAT Green Tea - 250 g", slug: "vat-green-250g", description: "Light, fragrant green tea for everyday refreshment.", price: 160, mrp: 200, category: "Tea", images:["https://images.unsplash.com/photo-1497534446932-c925b458314e?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9f8e2a6a9a0c9f2f3a2a9c6d7e1e2f4f"], stock:120, sku:"VAT-GRN-250", weight:"250g", highlights:["Delicate & floral","Low caffeine"] },
+      { id: 3, title: "Masala Tea Mix - 500 g", slug: "masala-tea-500g", description: "Aromatic masala blend for spicy chai.", price: 240, mrp: 300, category: "Tea", images:["https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=6b5e3c4a9a9a9a9a9a9a9a9a9a9a9a9"], stock:80, sku:"MAS-500", weight:"500g", highlights:["Spicy & warm","Perfect with milk"] },
+      { id: 4, title: "Tea Gift Pack", slug: "tea-gift-pack", description:"Curated gift pack for special occasions.", price: 999, mrp: 1200, category: "Gifts", images:["https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=9a9b9c9d9e9f9a9b9c9d9e9f9a9b9c9d"], stock:40, sku:"GFT-001", weight:"varies", highlights:["Premium presentation","Perfect for gifting"] }
+    ];
+
+    /* Utility - localStorage-backed "DB" */
+    const DB = {
+      productsKey: 'ajm_products_v1',
+      cartKey: 'ajm_cart_v1',
+      ordersKey: 'ajm_orders_v1',
+      loadProducts(){
+        const raw = localStorage.getItem(this.productsKey);
+        if(!raw){ localStorage.setItem(this.productsKey, JSON.stringify(DEFAULT_PRODUCTS)); return DEFAULT_PRODUCTS.slice(); }
+        try { return JSON.parse(raw); } catch(e){ localStorage.setItem(this.productsKey, JSON.stringify(DEFAULT_PRODUCTS)); return DEFAULT_PRODUCTS.slice(); }
+      },
+      saveProducts(list){ localStorage.setItem(this.productsKey, JSON.stringify(list)); },
+      loadCart(){ try{return JSON.parse(localStorage.getItem(this.cartKey))||[];}catch(e){return[]} },
+      saveCart(c){ localStorage.setItem(this.cartKey, JSON.stringify(c)); },
+      loadOrders(){ try{return JSON.parse(localStorage.getItem(this.ordersKey))||[];}catch(e){return[]} },
+      saveOrders(o){ localStorage.setItem(this.ordersKey, JSON.stringify(o)); }
+    };
+
+    /* App state */
+    let products = DB.loadProducts();
+    let cart = DB.loadCart();
+
+    /* DOM refs */
+    const grid = document.getElementById('grid');
+    const cartCountEl = document.getElementById('cartCount');
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartSubtotalEl = document.getElementById('cartSubtotal');
+    const overlay = document.getElementById('prodOverlay');
+    const modalMainImg = document.getElementById('modalMainImg');
+    const modalThumbs = document.getElementById('modalThumbs');
+    const prodTitle = document.getElementById('prodTitle');
+    const prodDesc = document.getElementById('prodDesc');
+    const prodSku = document.getElementById('prodSku');
+    const prodPrice = document.getElementById('prodPrice');
+    const prodMrp = document.getElementById('prodMrp');
+    const prodHighlights = document.getElementById('prodHighlights');
+    const qtyInput = document.getElementById('qtyInput');
+    const addToCartModal = document.getElementById('addToCartModal');
+
+    /* Render product cards */
+    function renderGrid(list){
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const el = document.createElement('article');
+        el.className = 'prod-card';
+        el.innerHTML = `
+          <div class="prod-media"><img src="${p.images?.[0]||p.images} " alt="${escapeHtml(p.title)}"></div>
+          <div style="padding:12px 6px">
+            <div class="prod-title">${escapeHtml(p.title)}</div>
+            <div class="prod-desc">${escapeHtml(p.description.substring(0,120))}...</div>
+            <div class="prod-price-row">
+              <div><div class="price">₹${format(p.price)}</div><div class="mrp">₹${format(p.mrp||p.price)}</div></div>
+              <div>
+                <button class="add-btn" data-id="${p.id}">Add</button>
+                <button class="icon-btn" data-view="${p.id}" style="margin-left:8px">View</button>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(el);
+      });
+      // wire events
+      grid.querySelectorAll('.add-btn').forEach(b=>b.addEventListener('click', e=>{
+        const id = Number(b.dataset.id);
+        addToCart(id,1);
+      }));
+      grid.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click', e=>openProductModal(Number(b.dataset.view))));
+    }
+
+    /* Helpers */
+    function format(v){ return Number(v).toFixed(2); }
+    function escapeHtml(s){ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    /* Cart ops */
+    function updateCartIndicator(){
+      const count = cart.reduce((s,i)=>s+i.qty,0);
+      cartCountEl.textContent = count;
+      DB.saveCart(cart);
+    }
+    function addToCart(productId, qty=1){
+      const prod = products.find(p=>p.id===productId);
+      if(!prod) return alert('Product not found');
+      const existing = cart.find(i=>i.id===productId);
+      if(existing){ existing.qty = Math.min(existing.qty + qty, prod.stock); }
+      else cart.push({ id:productId, qty:Math.min(qty,prod.stock), title:prod.title, price:prod.price, image:prod.images?.[0] });
+      updateCartIndicator();
+      animateCartBounce();
+      renderCartItems();
+    }
+    function removeFromCart(productId){
+      cart = cart.filter(i=>i.id!==productId);
+      updateCartIndicator();
+      renderCartItems();
+    }
+    function setQty(productId, qty){
+      const it = cart.find(i=>i.id===productId);
+      if(!it) return;
+      it.qty = Math.max(1, qty);
+      updateCartIndicator();
+      renderCartItems();
+    }
+    function clearCart(){
+      cart = [];
+      updateCartIndicator();
+      renderCartItems();
+    }
+
+    function renderCartItems(){
+      cartItemsList.innerHTML = '';
+      if(cart.length===0){ cartItemsList.innerHTML = '<div style="color:var(--muted)">Your cart is empty</div>'; cartSubtotalEl.textContent='₹0.00'; return; }
+      cart.forEach(item=>{
+        const p = products.find(x=>x.id===item.id);
+        const el = document.createElement('div');
+        el.className = 'cart-item';
+        el.innerHTML = `
+          <img src="${item.image||p.images?.[0]||''}" alt="${escapeHtml(item.title)}" />
+          <div style="flex:1">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong>${escapeHtml(item.title)}</strong>
+              <div>₹${format(item.price*item.qty)}</div>
+            </div>
+            <div style="color:var(--muted);font-size:13px;margin-top:6px">₹${format(item.price)} x 
+              <input type="number" min="1" value="${item.qty}" data-id="${item.id}" style="width:68px;border-radius:6px;padding:6px;background:transparent;border:1px solid rgba(255,255,255,0.04);color:inherit" />
+              <button data-remove="${item.id}" class="icon-btn" style="margin-left:8px">Remove</button>
+            </div>
+          </div>
+        `;
+        cartItemsList.appendChild(el);
+      });
+      // wire qty & remove
+      cartItemsList.querySelectorAll('input[type=number]').forEach(inp=>{
+        inp.addEventListener('change', ()=>setQty(Number(inp.dataset.id), Number(inp.value)));
+      });
+      cartItemsList.querySelectorAll('[data-remove]').forEach(b=>b.addEventListener('click', ()=>removeFromCart(Number(b.dataset.remove))));
+      // subtotal
+      const subtotal = cart.reduce((s,i)=>s + i.price*i.qty,0);
+      cartSubtotalEl.textContent = `₹${format(subtotal)}`;
+    }
+
+    /* modal/product detail */
+    function openProductModal(id){
+      const p = products.find(x=>x.id===id);
+      if(!p) return;
+      modalMainImg.src = p.images?.[0] || '';
+      modalThumbs.innerHTML = p.images.map(s=>`<img src="${s}" alt="thumb">`).join('');
+      prodTitle.textContent = p.title;
+      prodDesc.textContent = p.description;
+      prodSku.textContent = `${p.sku || ''} • ${p.weight || ''}`;
+      prodPrice.textContent = `₹${format(p.price)}`;
+      prodMrp.textContent = p.mrp ? `₹${format(p.mrp)}` : '';
+      prodHighlights.innerHTML = (p.highlights||[]).map(h=>`<li style="color:var(--muted)">${escapeHtml(h)}</li>`).join('');
+      qtyInput.value = 1;
+      addToCartModal.dataset.id = p.id;
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden','false');
+      // wire thumbs
+      modalThumbs.querySelectorAll('img').forEach(img=>img.addEventListener('click', e=>modalMainImg.src = e.target.src));
+    }
+    function closeModal(){ overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true'); }
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(); });
+
+    /* cart drawer open/close */
+    document.getElementById('btnCart').addEventListener('click', ()=>{ cartDrawer.classList.add('open'); cartDrawer.setAttribute('aria-hidden','false'); renderCartItems(); });
+    document.getElementById('closeCart').addEventListener('click', ()=>{ cartDrawer.classList.remove('open'); cartDrawer.setAttribute('aria-hidden','true'); });
+
+    document.getElementById('btnClearCart').addEventListener('click', ()=>{ if(confirm('Clear cart?')) clearCart(); });
+
+    /* add to cart modal button */
+    addToCartModal.addEventListener('click', ()=>{
+      const id = Number(addToCartModal.dataset.id);
+      const qty = Number(qtyInput.value) || 1;
+      addToCart(id, qty);
+      closeModal();
+    });
+
+    /* Search / filters / sort */
+    document.getElementById('searchInput').addEventListener('input', (e)=>{
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = products.filter(p => p.title.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+      renderGrid(filtered);
+    });
+
+    document.getElementById('filterCategory').addEventListener('change', (e)=>{
+      applyFilters();
+    });
+    document.getElementById('sortSel').addEventListener('change', (e)=> applyFilters() );
+
+    function applyFilters(){
+      const cat = document.getElementById('filterCategory').value;
+      const sort = document.getElementById('sortSel').value;
+      let out = products.slice();
+      if(cat) out = out.filter(p=>p.category===cat);
+      if(sort==='price_asc') out.sort((a,b)=>a.price-b.price);
+      else if(sort==='price_desc') out.sort((a,b)=>b.price-a.price);
+      renderGrid(out);
+    }
+
+    /* load more (for demo just re-renders) */
+    document.getElementById('loadMore').addEventListener('click', ()=> alert('Load more would fetch next products (mock)'));
+
+    /* hero actions */
+    document.getElementById('shopNow').addEventListener('click', ()=> window.scrollTo({top: document.getElementById('productsSection').offsetTop - 80, behavior:'smooth'}) );
+    document.getElementById('learnMore').addEventListener('click', ()=> alert('VAT TEA: Ethically sourced Assam leaves — more content could go here.'));
+
+    /* checkout navigation */
+    document.getElementById('btnCheckout').addEventListener('click', ()=>{
+      if(cart.length===0){ alert('Cart is empty'); return; }
+      // open checkout UI
+      document.getElementById('checkoutSection').style.display = 'block';
+      cartDrawer.classList.remove('open');
+      window.scrollTo({top: document.getElementById('checkoutSection').offsetTop - 60, behavior:'smooth'});
+    });
+    document.getElementById('cancelCheckout').addEventListener('click', ()=>{
+      document.getElementById('checkoutSection').style.display = 'none';
+    });
+
+    /* checkout form submit (mock payment) */
+    document.getElementById('checkoutForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      // basic validation passed by required attributes
+      // build order
+      const data = new FormData(e.target);
+      const order = {
+        id: 'ORD' + Date.now(),
+        name: data.get('name'),
+        phone: data.get('phone'),
+        address: data.get('address'),
+        city: data.get('city'),
+        pincode: data.get('pincode'),
+        items: cart.map(i=>({ id:i.id, qty:i.qty, price:i.price })),
+        total: cart.reduce((s,i)=>s + i.qty*i.price,0)
+      };
+      // reduce stock locally (simulate atomic)
+      order.items.forEach(it=>{
+        const prod = products.find(p=>p.id===it.id);
+        if(prod) prod.stock = Math.max(0, prod.stock - it.qty);
+      });
+      // persist order
+      const orders = DB.loadOrders();
+      orders.push(order);
+      DB.saveOrders(orders);
+      DB.saveProducts(products);
+      // clear cart
+      clearCart();
+      // show success panel
+      document.getElementById('checkoutSection').style.display = 'none';
+      document.getElementById('orderSuccessSection').style.display = 'block';
+      document.getElementById('orderRef').textContent = `Order reference: ${order.id} • Total ₹${format(order.total)}`;
+      // small confetti leaves
+      showLeafConfetti(18);
+    });
+
+    document.getElementById('backToShop').addEventListener('click', ()=>{
+      document.getElementById('orderSuccessSection').style.display = 'none';
+      window.scrollTo({top:0,behavior:'smooth'});
+    });
+
+    /* Admin quick access */
+    document.getElementById('adminOpen').addEventListener('click', async ()=>{
+      const pwd = prompt('Admin password (demo):');
+      if(pwd === 'ajmath-admin-2025'){
+        openAdminPanel();
+      } else {
+        alert('Wrong password');
+      }
+    });
+
+    function openAdminPanel(){
+      const name = prompt('Add new product title (leave empty to edit existing):');
+      if(!name){
+        // list products to edit
+        let list = products.map(p=>`${p.id}: ${p.title} (stock:${p.stock})`).join('\n');
+        const choose = prompt('Products:\n' + list + '\n\nEnter product id to delete or "e<ID>" to edit (e.g., e2) or cancel:');
+        if(!choose) return;
+        if(choose.startsWith('e')){
+          const id = Number(choose.slice(1));
+          const prod = products.find(p=>p.id===id);
+          if(!prod) return alert('Not found');
+          const newTitle = prompt('New title', prod.title);
+          if(newTitle) prod.title = newTitle;
+          const newPrice = prompt('New price', prod.price);
+          if(newPrice) prod.price = Number(newPrice);
+          DB.saveProducts(products);
+          renderGrid(products);
+          alert('Updated');
+        } else {
+          const id = Number(choose);
+          products = products.filter(p=>p.id!==id);
+          DB.saveProducts(products);
+          renderGrid(products);
+          alert('Deleted');
+        }
+        return;
+      }
+      const price = Number(prompt('Price (₹):', '100')) || 100;
+      const mrp = Number(prompt('MRP (₹):', String(price+50))) || price;
+      const category = prompt('Category:', 'Tea') || 'Tea';
+      const img = prompt('Image URL (or leave blank for placeholder):', '') || 'https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=4b8a3f4d050c3a0ee0f9672d6a6f2f4a';
+      const newId = Math.max(0, ...products.map(p=>p.id)) + 1;
+      const newProd = { id: newId, title: name, price, mrp, category, images:[img], stock:100, sku:`AUTO-${newId}`, weight:'250g', highlights:[] };
+      products.push(newProd);
+      DB.saveProducts(products);
+      renderGrid(products);
+      alert('Product added');
+    }
+
+    /* small cart bounce animation */
+    function animateCartBounce(){
+      const btn = document.getElementById('btnCart');
+      btn.animate([{ transform:'translateY(0)'},{ transform:'translateY(-6px)'},{ transform:'translateY(0)' }], { duration: 420, easing:'cubic-bezier(.2,.9,.3,1)' });
+    }
+
+    /* leaf confetti on success */
+    function showLeafConfetti(count=12){
+      for(let i=0;i<count;i++){
+        const leaf = document.createElement('div');
+        leaf.style.position='fixed';
+        leaf.style.left = (20 + Math.random()*60) + '%';
+        leaf.style.top = '-10%';
+        leaf.style.width = (16 + Math.random()*28) + 'px';
+        leaf.style.height = 'auto';
+        leaf.style.zIndex = 9999;
+        leaf.style.backgroundImage = 'url(https://i.ibb.co/2qqvCPB/leaf.png)';
+        leaf.style.backgroundSize = 'contain';
+        leaf.style.pointerEvents = 'none';
+        leaf.style.opacity = Math.random()*0.9 + 0.2;
+        leaf.style.transform = `rotate(${Math.random()*360}deg)`;
+        document.body.appendChild(leaf);
+        const dur = 3000 + Math.random()*2200;
+        leaf.animate([
+          { transform: `translateY(0) rotate(0deg)`, opacity: leaf.style.opacity },
+          { transform: `translateY(${300 + Math.random()*600}px) rotate(${360 + Math.random()*720}deg)`, opacity: 0.0 }
+        ], { duration: dur, easing: 'linear' });
+        setTimeout(()=>leaf.remove(), dur+200);
+      }
+    }
+
+    /* Helper: escape and init */
+    function init(){
+      products = DB.loadProducts();
+      cart = DB.loadCart();
+      renderGrid(products);
+      updateCartIndicator();
+      renderCartItems();
+    }
+    init();
+
+    /* small accessibility: close overlays with Esc */
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ if(overlay.classList.contains('open')) closeModal(); if(cartDrawer.classList.contains('open')){cartDrawer.classList.remove('open')} } });
+
+    /* save products when page unloads (in case admin edited) */
+    window.addEventListener('beforeunload', ()=>{ DB.saveProducts(products); DB.saveCart(cart); });
+  </script>
+</body>
+</html>
